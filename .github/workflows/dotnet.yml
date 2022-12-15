@@ -33,5 +33,19 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         path: ${{ github.workspace }}/app
+        name: dotnet-app
+
+  deploy:
+    runs-on: ubuntu-22.04
+    environment: dev
+    steps:
+    - name: Download artifact
+      with:
+        name: dotnet-app
+      uses: actions/download-artifact@v3
+    - name: Deploy app
+      uses: azure/webapps-deploy@v2
+      with:
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
   
     
