@@ -36,6 +36,7 @@ jobs:
         name: dotnet-app
 
   deploy:
+    needs: build
     runs-on: ubuntu-22.04
     environment: dev
     steps:
