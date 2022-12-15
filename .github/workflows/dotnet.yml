@@ -14,9 +14,7 @@ env:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -30,8 +28,10 @@ jobs:
     - name: Test
       run: dotnet test --configuration ${{ env.buildConfiguration }} --no-build --verbosity normal
     - name: Publish dotnet app
-      run: dotnet publish  --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}
+      run: dotnet publish  --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}/app
     - name: Publish artifact
       uses: actions/upload-artifact@v3
       with:
-        path: ${{ github.workspace }}
+        path: ${{ github.workspace }}/app
+  
+    
